@@ -26,42 +26,45 @@ logging.basicConfig(
 # --- SUPPRESS WARNINGS ---
 warnings.filterwarnings("ignore", category=FutureWarning, module="google.api_core")
 
+# --- 🟢 GOOGLE INDEXING LIB ---
+# Kita bungkus try-except agar script tidak crash jika library google belum diinstall
+try:
+    from oauth2client.service_account import ServiceAccountCredentials
+    from googleapiclient.discovery import build
+    GOOGLE_LIB_INSTALLED = True
+except ImportError:
+    logging.warning("⚠️ Google API Library not found. Install with: pip install google-api-python-client oauth2client")
+    GOOGLE_LIB_INSTALLED = False
+
 # --- 🟢 CONFIGURATION ---
-# Masukkan API Key Groq Anda di Environment Variable atau langsung di sini (Not Recommended for Prod)
 GROQ_KEYS_RAW = os.environ.get("GROQ_API_KEY", "") 
 GROQ_API_KEYS = [k.strip() for k in GROQ_KEYS_RAW.split(",") if k.strip()]
+GOOGLE_JSON_KEY = os.environ.get("GOOGLE_INDEXING_KEY", "") 
 
-WEBSITE_URL = "https://trends-daily-news.netlify.app" 
-INDEXNOW_KEY = "18753e66adf346f4bb2889ca1e3c7c51" # Ganti dengan key Anda jika ada
+WEBSITE_URL = "https://glitz-daily-news.vercel.app" 
+INDEXNOW_KEY = "5b3e50c6d7b845d3ba6768de22595f94" 
 
 if not GROQ_API_KEYS:
     logging.critical("❌ FATAL ERROR: Groq API Key is missing!")
     exit(1)
 
 # --- 🟢 CONSTANTS & SETTINGS ---
-TARGET_PER_SOURCE = 2     # Jangan terlalu banyak agar tidak dianggap spam
-COOLDOWN_SECONDS = 20     # Jeda antar artikel (PENTING untuk Anti-Rate Limit)
-AUTHOR_NAME = "trends Editorial Desk"
+TARGET_PER_SOURCE = 2     
+COOLDOWN_SECONDS = 20     
+AUTHOR_NAME = "Glitz Editorial Desk"
 
-# Direktori
 CONTENT_DIR = "content/articles"
 IMAGE_DIR = "static/images"
 DATA_DIR = "automation/data"
 MEMORY_FILE = f"{DATA_DIR}/link_memory.json"
 USED_IMAGES_FILE = f"{DATA_DIR}/used_images.json"
 
-# Sumber Berita (Entertainment Focus)
 RSS_SOURCES = {
-    # 1. Google Trends Realtime (Paling Bagus untuk Discover)
     "Viral Trends US": "https://trends.google.com/trending/rss?geo=US&category=4",
-    
-    # 2. Google News Topics
     "Entertainment Headlines": "https://news.google.com/rss/headlines/section/topic/ENTERTAINMENT?hl=en-US&gl=US&ceid=US:en",
-    "TV & Movies": "https://news.google.com/rss/search?q=movies+tv+shows+streaming+news&hl=en-US&gl=US&ceid=US:en",
-    "Celebrity Gossip": "https://news.google.com/rss/search?q=celebrity+gossip+news&hl=en-US&gl=US&ceid=US:en"
+    "TV & Movies": "https://news.google.com/rss/search?q=movies+tv+shows+streaming+news&hl=en-US&gl=US&ceid=US:en"
 }
 
-# Authority Sites (Untuk External Linking - Syarat SEO/Discover)
 AUTHORITY_MAP = {
     "Variety": "https://variety.com",
     "The Hollywood Reporter": "https://www.hollywoodreporter.com",
@@ -73,14 +76,12 @@ AUTHORITY_MAP = {
     "People": "https://people.com"
 }
 
-# User Agents (Untuk manipulasi request gambar agar tidak diblokir)
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15",
     "Mozilla/5.0 (iPhone; CPU iPhone OS 17_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Mobile/15E148 Safari/604.1"
 ]
 
-# Database Stok Gambar HD (Cadangan jika AI Error/Jelek)
 RAW_IMAGE_DB = {
     "General": [
         "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=95",
@@ -161,22 +162,15 @@ def download_and_process_image(url, path, is_ai=False):
         headers = {"User-Agent": random.choice(USER_AGENTS)}
         r = requests.get(url, headers=headers, timeout=30)
         
-        # 🛡️ FILTER 1: Size Check (Anti Image Error/Placeholder)
-        # Gambar error biasanya kecil (< 15KB). Gambar HD > 50KB.
         if len(r.content) < 15000:
             logging.warning("      ⚠️ Image too small/corrupt. Skipping.")
             return False
 
         if r.status_code == 200:
             img = Image.open(BytesIO(r.content)).convert("RGB")
-            
-            # 🛡️ FILTER 2: Resize Wajib 1200x675 (Requirement Google Discover)
             img = img.resize((1200, 675), Image.Resampling.LANCZOS)
-            
-            # Sedikit enhance warna biar pop-up
             enhancer = ImageEnhance.Color(img)
             img = enhancer.enhance(1.1)
-            
             img.save(path, "WEBP", quality=85)
             return True
     except Exception as e:
@@ -192,52 +186,73 @@ def generate_image_hybrid(query, slug):
 
     logging.info(f"🎨 Processing Image for: {slug}...")
 
-    # --- LANGKAH 1: COBA AI GENERATOR (Dengan Proteksi) ---
+    # TRY AI GENERATOR
     try:
         clean_query = re.sub(r'[^a-zA-Z0-9\s]', '', query)[:150]
         safe_prompt = requests.utils.quote(f"cinematic photo of {clean_query}, realistic, 4k, news style")
         seed = random.randint(1, 999999)
-        
-        # URL dengan Random Seed agar tidak dianggap cache
         ai_url = f"https://image.pollinations.ai/prompt/{safe_prompt}?width=1280&height=720&nologo=true&model=flux-realism&seed={seed}"
         
-        # Coba download AI image
         logging.info("      🤖 Attempting AI Generation...")
         if download_and_process_image(ai_url, filepath, is_ai=True):
             logging.info("      ✅ AI Image Created Successfully")
             return public_path
-            
     except Exception as e:
         logging.warning(f"      ⚠️ AI Gen Failed: {e}")
 
-    # --- LANGKAH 2: FALLBACK KE STOCK (Jika AI Gagal) ---
+    # FALLBACK STOCK
     logging.info("      🔄 Switching to High-Quality Stock Image...")
     stock_url = get_unique_stock_image()
-    
     if download_and_process_image(stock_url, filepath, is_ai=False):
         mark_image_as_used(stock_url, slug)
         logging.info("      ✅ Stock Image Applied")
         return public_path
 
-    # Fallback terakhir
-    return "/images/default-trends.jpg"
+    return "/images/default-glitz.jpg"
+
+# --- 🟢 INDEXING API (RESTORED) ---
+def submit_to_indexnow(url):
+    try:
+        endpoint = "https://api.indexnow.org/indexnow"
+        host = WEBSITE_URL.replace("https://", "").replace("http://", "")
+        data = {
+            "host": host,
+            "key": INDEXNOW_KEY,
+            "keyLocation": f"https://{host}/{INDEXNOW_KEY}.txt",
+            "urlList": [url]
+        }
+        requests.post(endpoint, json=data, timeout=10)
+        logging.info("      🚀 IndexNow Submitted")
+    except Exception as e:
+        logging.warning(f"      ⚠️ IndexNow Failed: {e}")
+
+def submit_to_google(url):
+    if not GOOGLE_LIB_INSTALLED or not GOOGLE_JSON_KEY:
+        return
+    try:
+        creds_dict = json.loads(GOOGLE_JSON_KEY)
+        SCOPES = ["https://www.googleapis.com/auth/indexing"]
+        credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, SCOPES)
+        service = build("indexing", "v3", credentials=credentials)
+        body = {"url": url, "type": "URL_UPDATED"}
+        service.urlNotifications().publish(body=body).execute()
+        logging.info("      🚀 Google Indexing Submitted")
+    except Exception as e:
+        logging.warning(f"      ⚠️ Google Indexing Failed: {e}")
 
 # --- 🤖 AI WRITER ENGINE ---
 def call_groq_api(messages, model="llama-3.3-70b-versatile", response_format=None):
-    # Retry Logic jika API Error
     for attempt in range(3):
         try:
             api_key = random.choice(GROQ_API_KEYS)
             client = Groq(api_key=api_key)
-            
             kwargs = {
                 "model": model,
                 "messages": messages,
-                "temperature": 0.7, # Kreatif tapi terkontrol
+                "temperature": 0.7,
                 "max_tokens": 6000
             }
             if response_format: kwargs["response_format"] = response_format
-            
             chat = client.chat.completions.create(**kwargs)
             return chat.choices[0].message.content
         except Exception as e:
@@ -288,12 +303,12 @@ def write_article(metadata, summary, internal_links, external_sources):
 def repair_markdown(text):
     if not text: return ""
     text = text.replace("###", "\n\n###").replace("##", "\n\n##")
-    text = re.sub(r'(?<!\n)\s-\s\[', '\n\n- [', text) # Fix list stacking
+    text = re.sub(r'(?<!\n)\s-\s\[', '\n\n- [', text) 
     return text
 
 # --- MAIN AUTOMATION ---
 def main():
-    logging.info("🎬 Starting trends Automation (Discover Edition)...")
+    logging.info("🎬 Starting Glitz Automation (Discover + Indexing Edition)...")
     os.makedirs(CONTENT_DIR, exist_ok=True)
     os.makedirs(IMAGE_DIR, exist_ok=True)
     os.makedirs(DATA_DIR, exist_ok=True)
@@ -318,40 +333,28 @@ def main():
             clean_title = clean_camel_case(entry.title.split(" - ")[0])
             logging.info(f"   🔥 Analyze: {clean_title[:40]}...")
 
-            # 1. Metadata Generation
             meta = get_metadata(clean_title, entry.summary)
-            if not meta: 
-                logging.warning("      ⚠️ Metadata failed. Skip.")
-                continue
+            if not meta: continue
 
             slug = slugify(meta['title'])
             filepath = os.path.join(CONTENT_DIR, f"{slug}.md")
 
-            if os.path.exists(filepath):
-                # logging.info("      ⏭️ Exists. Skip.")
-                continue
+            if os.path.exists(filepath): continue
 
-            # 2. Content Generation
             int_links = get_internal_links()
             ext_sources = get_external_sources_formatted()
             
             raw_content = write_article(meta, entry.summary, int_links, ext_sources)
-            if not raw_content: 
-                logging.warning("      ⚠️ Content gen failed. Skip.")
-                continue
+            if not raw_content: continue
 
             final_content = repair_markdown(raw_content)
-            
-            # Inject Ad slot secara aman
             parts = final_content.split("\n\n")
             if len(parts) > 4: parts.insert(3, "\n{{< ad >}}\n")
             final_content = "\n\n".join(parts)
 
-            # 3. Image Processing (The Discover Crucial Part)
             img_query = meta['keywords'][0] if meta['keywords'] else meta['title']
             img_path = generate_image_hybrid(img_query, slug)
 
-            # 4. Save
             date_now = datetime.now().strftime("%Y-%m-%dT%H:%M:%S+07:00")
             
             md_file = f"""---
@@ -379,10 +382,15 @@ url: "/{slug}/"
             save_link_to_memory(meta['title'], slug)
             logging.info(f"      ✅ Published: {slug}")
             
+            # --- 🚀 INDEXING (RESTORED) ---
+            full_url = f"{WEBSITE_URL}/{slug}/"
+            submit_to_indexnow(full_url)
+            submit_to_google(full_url)
+            # -----------------------------
+            
             source_count += 1
             generated_count += 1
             
-            # 5. Cooldown (PENTING untuk Anti-Rate Limit)
             logging.info(f"      ⏳ Cooldown {COOLDOWN_SECONDS}s...")
             time.sleep(COOLDOWN_SECONDS)
 

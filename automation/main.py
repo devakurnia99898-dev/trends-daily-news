@@ -82,6 +82,7 @@ USER_AGENTS = [
     "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1"
 ]
 
+# 🟢 DATABASE GAMBAR STABIL (Updated Fresh Links)
 RAW_IMAGE_DB = {
     "General": [
         "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=95",
@@ -91,10 +92,15 @@ RAW_IMAGE_DB = {
         "https://images.unsplash.com/photo-1505686994434-e3cc5abf1330?w=1200&q=95",
         "https://images.unsplash.com/photo-1514525253440-b393452e8d26?w=1200&q=95",
         "https://images.unsplash.com/photo-1499364615650-ec38552f4f34?w=1200&q=95",
-        "https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?w=1200&q=95",
-        "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=1200&q=95",
-        "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=1200&q=95",
-        "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200&q=95"
+        # Tambahan Baru:
+        "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1200&q=95", 
+        "https://images.unsplash.com/photo-1522869635100-1f4906a1f07d?w=1200&q=95",
+        "https://images.unsplash.com/photo-1593784697956-14f46924c560?w=1200&q=95",
+        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=95",
+        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=1200&q=95",
+        "https://images.unsplash.com/photo-1515634928627-2a4e0dae3ddf?w=1200&q=95",
+        "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200&q=95",
+        "https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?w=1200&q=95"
     ]
 }
 

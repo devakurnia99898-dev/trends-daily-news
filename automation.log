@@ -678,3 +678,84 @@
 2026-01-28 21:07:25,486 - INFO -       ⏳ Cooldown 25s...
 2026-01-28 21:07:50,486 - INFO - 
 🎉 DONE! Generated 6 articles.
+2026-01-28 21:09:39,478 - INFO - 🎬 Starting Glitz Daily Automation (SAFE MODE)...
+2026-01-28 21:09:39,478 - INFO - 
+📡 Scanning: Entertainment US...
+2026-01-28 21:09:39,766 - INFO -    ✨ Analyzing: Bruce Springsteen releases anti-ICE prot...
+2026-01-28 21:09:40,153 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:09:40,175 - ERROR - Error loading automation/data/link_memory.json: Expecting value: line 2 column 1 (char 1)
+2026-01-28 21:09:44,288 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:09:44,289 - INFO - 🎨 Processing Image for: bruce-springsteen-protest-song-released...
+2026-01-28 21:09:44,289 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-28 21:09:44,456 - INFO -    ✅ Stock Image Applied
+2026-01-28 21:09:44,457 - ERROR - Error loading automation/data/link_memory.json: Expecting value: line 2 column 1 (char 1)
+2026-01-28 21:09:45,025 - INFO -    🚀 IndexNow Submitted
+2026-01-28 21:09:45,294 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-28 21:09:45,295 - INFO - Attempting refresh to obtain initial access_token
+2026-01-28 21:09:45,321 - INFO - Refreshing access_token
+2026-01-28 21:09:45,657 - INFO -    🚀 Google Indexing Submitted
+2026-01-28 21:09:45,657 - INFO -       ✅ Published: bruce-springsteen-protest-song-released
+2026-01-28 21:10:00,658 - INFO -    ✨ Analyzing: 'Melania,' 'Send Help' Box Office Openin...
+2026-01-28 21:10:00,901 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:10:03,222 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:10:03,223 - INFO - 🎨 Processing Image for: melania-movie-opening-weekend...
+2026-01-28 21:10:03,223 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-28 21:10:03,745 - INFO -    ✅ Stock Image Applied
+2026-01-28 21:10:04,084 - INFO -    🚀 IndexNow Submitted
+2026-01-28 21:10:04,086 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-28 21:10:04,087 - INFO - Attempting refresh to obtain initial access_token
+2026-01-28 21:10:04,113 - INFO - Refreshing access_token
+2026-01-28 21:10:04,408 - INFO -    🚀 Google Indexing Submitted
+2026-01-28 21:10:04,408 - INFO -       ✅ Published: melania-movie-opening-weekend
+2026-01-28 21:10:19,408 - INFO - 
+📡 Scanning: Gaming News...
+2026-01-28 21:10:20,102 - INFO -    ✨ Analyzing: Two Works by TECH.C. Students Win Awards...
+2026-01-28 21:10:20,423 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:10:24,240 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:10:24,241 - INFO - 🎨 Processing Image for: esports-students-win-big...
+2026-01-28 21:10:24,241 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-28 21:10:24,364 - INFO -    ✅ Stock Image Applied
+2026-01-28 21:10:24,857 - INFO -    🚀 IndexNow Submitted
+2026-01-28 21:10:24,859 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-28 21:10:24,860 - INFO - Attempting refresh to obtain initial access_token
+2026-01-28 21:10:24,886 - INFO - Refreshing access_token
+2026-01-28 21:10:25,174 - INFO -    🚀 Google Indexing Submitted
+2026-01-28 21:10:25,174 - INFO -       ✅ Published: esports-students-win-big
+2026-01-28 21:10:40,175 - INFO -    ✨ Analyzing: Play VS acquires Vanta Esports, expandin...
+2026-01-28 21:10:40,439 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:10:42,696 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:10:42,697 - INFO - 🎨 Processing Image for: play-vs-expands-gaming-network...
+2026-01-28 21:10:42,697 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-28 21:10:43,169 - INFO -    ✅ Stock Image Applied
+2026-01-28 21:10:43,463 - INFO -    🚀 IndexNow Submitted
+2026-01-28 21:10:43,465 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-28 21:10:43,465 - INFO - Attempting refresh to obtain initial access_token
+2026-01-28 21:10:43,491 - INFO - Refreshing access_token
+2026-01-28 21:10:43,776 - INFO -    🚀 Google Indexing Submitted
+2026-01-28 21:10:43,776 - INFO -       ✅ Published: play-vs-expands-gaming-network
+2026-01-28 21:10:58,776 - INFO - 
+📡 Scanning: Pop Culture...
+2026-01-28 21:10:59,349 - INFO -    ✨ Analyzing: A Head-to-Head Showdown Between 2016 and...
+2026-01-28 21:10:59,772 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:11:02,620 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:11:02,621 - INFO - 🎨 Processing Image for: then-vs-now-showdown...
+2026-01-28 21:11:02,621 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-28 21:11:02,962 - INFO -    ✅ Stock Image Applied
+2026-01-28 21:11:03,411 - INFO -    🚀 IndexNow Submitted
+2026-01-28 21:11:03,412 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-28 21:11:03,413 - INFO - Attempting refresh to obtain initial access_token
+2026-01-28 21:11:03,439 - INFO - Refreshing access_token
+2026-01-28 21:11:03,737 - INFO -    🚀 Google Indexing Submitted
+2026-01-28 21:11:03,737 - INFO -       ✅ Published: then-vs-now-showdown
+2026-01-28 21:11:18,737 - INFO -    ✨ Analyzing: The 15 biggest pop culture moments of 20...
+2026-01-28 21:11:19,058 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:11:22,099 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-28 21:11:22,100 - INFO - 🎨 Processing Image for: big-pop-culture-moments...
+2026-01-28 21:11:22,100 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-28 21:11:22,558 - INFO -    🚀 IndexNow Submitted
+2026-01-28 21:11:22,560 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-28 21:11:22,560 - INFO - Attempting refresh to obtain initial access_token
+2026-01-28 21:11:22,586 - INFO - Refreshing access_token
+2026-01-28 21:11:22,868 - INFO -    🚀 Google Indexing Submitted
+2026-01-28 21:11:22,868 - INFO -       ✅ Published: big-pop-culture-moments
+2026-01-28 21:11:37,868 - INFO - 🎉 Automation Finished.

@@ -1,0 +1,69 @@
+baseURL: "https://trends-daily-news.vercel.app/"
+languageCode: "en-us"
+title: "trends Daily"
+
+# PENTING: Mengubah link relative menjadi absolute (https://...) 
+# Ini sangat membantu agar Sitemap terbaca valid oleh Google
+canonifyURLs: true
+
+# Aktifkan pembuatan robots.txt otomatis
+enableRobotsTXT: true
+
+permalinks:
+  articles: "/:slug/"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true # Mengizinkan HTML mentah (penting untuk kode Iklan/Embed)
+
+# Konfigurasi Output agar Sitemap pasti ter-generate
+outputs:
+  home:
+    - HTML
+    - RSS
+    - Sitemap
+  page:
+    - HTML
+  section:
+    - HTML
+    - RSS
+  taxonomy:
+    - HTML
+    - RSS
+  term:
+    - HTML
+    - RSS
+
+# Konfigurasi Sitemap Khusus (Agar Google lebih suka)
+sitemap:
+  changefreq: "daily"
+  filename: "sitemap.xml"
+  priority: 0.5
+
+services:
+  rss:
+    limit: 50
+
+taxonomies:
+  category: "categories"
+  tag: "tags"
+
+# --- BAGIAN INI SUDAH DIUBAH TOTAL KE trends NICHE ---
+params:
+  # Description SEO Friendly untuk trends (Hapus Fabrizio Romano dll)
+  description: "Your trusted source for breaking trendsnology news, AI breakthroughs, Gadget reviews, and Cyber Security analysis. We decode the future."
+  
+  # Ganti nama gambar default. 
+  # Pastikan Anda upload gambar 'default-trends.jpg' ke folder /static/images/
+  defaultImage: "/images/default-trends.jpg"
+  
+  author:
+    name: "trends Daily Team"
+    # Gunakan email domain sendiri jika ada, atau gmail resmi situs
+    email: "contact@trends-daily.vercel.app" 
+
+  # Tambahkan Social Media (Opsional, biar terlihat Pro)
+  # social:
+  #   twitter: "trendsdaily"
+  #   instagram: "trendsdaily"

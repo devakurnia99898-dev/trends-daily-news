@@ -1,0 +1,110 @@
+<header class="bg-gray-900 border-b-4 border-purple-600 sticky top-0 z-50">
+    <!-- Note: Saya ganti border color jadi purple-600 biar lebih 'Pop Culture', 
+         tapi kalau mau tetap merah tinggal ganti jadi red-600 -->
+    
+    <!-- Top Bar (Simple Date & trends Tagline) -->
+    <div class="bg-black text-gray-400 text-[10px] py-1 hidden md:block border-b border-gray-800">
+        <div class="container mx-auto px-4 flex justify-between">
+            <span>{{ now.Format "Mon, Jan 02, 2006" }}</span>
+            <span class="font-bold tracking-wider text-purple-400">MOVIES • TV SHOWS • MUSIC • CELEBRITY</span>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="container mx-auto px-4 h-16 md:h-20 flex items-center justify-between relative bg-gray-900">
+        
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 group shrink-0" aria-label="Homepage">
+            <!-- Icon: Equalizer / Sound Wave Style -->
+            <div class="w-8 h-8 rounded border-2 border-white flex items-end justify-center gap-[2px] pb-1 group-hover:border-purple-500 transition relative overflow-hidden">
+                <div class="absolute inset-0 bg-white/5 group-hover:bg-purple-600/20 transition"></div>
+                <!-- Animated Bars -->
+                <div class="w-1 h-3 bg-white group-hover:bg-purple-500 rounded-t-sm transition-all duration-300 group-hover:h-5"></div>
+                <div class="w-1 h-5 bg-white group-hover:bg-purple-400 rounded-t-sm transition-all duration-300 group-hover:h-3"></div>
+                <div class="w-1 h-2 bg-white group-hover:bg-purple-500 rounded-t-sm transition-all duration-300 group-hover:h-4"></div>
+            </div>
+            <span class="font-display font-black text-xl tracking-tighter text-white">
+                trends<span class="font-light text-purple-400">DAILY</span>
+            </span>
+        </a>
+
+        <!-- Desktop Menu (Entertainment Categories) -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a href="/" class="text-sm font-bold text-gray-300 hover:text-white uppercase tracking-wide transition">Home</a>
+
+            <!-- Dropdown: Watch (Movies & TV) -->
+            <div class="relative group py-6">
+                <button class="flex items-center gap-1 text-sm font-bold text-gray-300 group-hover:text-white uppercase tracking-wide cursor-pointer focus:outline-none">
+                    Watch <span class="text-[10px]">▼</span>
+                </button>
+                <div class="absolute left-0 top-full w-52 bg-gray-900 border-t-2 border-purple-600 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-1 group-hover:translate-y-0">
+                    <a href="/categories/movies-film" class="block px-4 py-3 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800 border-b border-gray-800">Movies & Film</a>
+                    <a href="/categories/tv-shows-streaming" class="block px-4 py-3 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800 border-b border-gray-800">TV Shows & Series</a>
+                    <a href="/categories/anime-manga" class="block px-4 py-3 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800">Anime & Manga</a>
+                </div>
+            </div>
+
+            <!-- Dropdown: Listen & Play -->
+            <div class="relative group py-6">
+                <button class="flex items-center gap-1 text-sm font-bold text-gray-300 group-hover:text-white uppercase tracking-wide cursor-pointer focus:outline-none">
+                    Play <span class="text-[10px]">▼</span>
+                </button>
+                <div class="absolute left-0 top-full w-52 bg-gray-900 border-t-2 border-purple-600 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-1 group-hover:translate-y-0">
+                    <a href="/categories/music-concerts" class="block px-4 py-3 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800 border-b border-gray-800">Music & Charts</a>
+                    <a href="/categories/gaming-esports" class="block px-4 py-3 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800">Gaming & Esports</a>
+                </div>
+            </div>
+
+            <!-- Dropdown: Buzz (Celeb & Trends) -->
+            <div class="relative group py-6">
+                <button class="flex items-center gap-1 text-sm font-bold text-gray-300 group-hover:text-white uppercase tracking-wide cursor-pointer focus:outline-none">
+                    Buzz <span class="text-[10px]">▼</span>
+                </button>
+                <div class="absolute left-0 top-full w-52 bg-gray-900 border-t-2 border-purple-600 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-1 group-hover:translate-y-0">
+                    <a href="/categories/celebrity-lifestyle" class="block px-4 py-3 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800 border-b border-gray-800">Celebrity Gossip</a>
+                    <a href="/categories/pop-culture-trends" class="block px-4 py-3 text-xs font-bold text-gray-400 hover:text-white hover:bg-gray-800">Viral Trends</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Right Side -->
+        <div class="flex items-center gap-4">
+            <!-- Call to Action -->
+            <a href="https://wwp.ailooe.com/redirect-zone/058f7788" target="_blank" rel="nofollow noopener noreferrer" class="bg-white px-4 py-1 rounded-full text-xs font-black uppercase text-gray-900 hover:bg-purple-600 hover:text-white transition shadow-lg flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Hot News
+            </a>
+            
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" aria-label="Menu" class="lg:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu (Entertainment Categories) -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-gray-900 border-t border-gray-800">
+        <nav class="flex flex-col p-4 space-y-1">
+            <a href="/" class="block px-4 py-2 text-sm font-bold text-white uppercase">Home</a>
+            
+            <div class="px-4 py-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-2">On Screen</div>
+            <a href="/categories/movies-film" class="block px-6 py-2 text-sm text-gray-400 hover:text-white">Movies</a>
+            <a href="/categories/tv-shows-streaming" class="block px-6 py-2 text-sm text-gray-400 hover:text-white">TV & Netflix</a>
+            <a href="/categories/anime-manga" class="block px-6 py-2 text-sm text-gray-400 hover:text-white">Anime</a>
+            
+            <div class="px-4 py-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-2">Pop Scene</div>
+            <a href="/categories/music-concerts" class="block px-6 py-2 text-sm text-gray-400 hover:text-white">Music</a>
+            <a href="/categories/gaming-esports" class="block px-6 py-2 text-sm text-gray-400 hover:text-white">Gaming</a>
+
+            <div class="px-4 py-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-2">Lifestyle</div>
+            <a href="/categories/celebrity-lifestyle" class="block px-6 py-2 text-sm text-gray-400 hover:text-white">Celebrity</a>
+            <a href="/categories/pop-culture-trends" class="block px-6 py-2 text-sm text-gray-400 hover:text-white">Viral</a>
+        </nav>
+    </div>
+
+    <script>
+        // Simple Vanilla JS toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</header>

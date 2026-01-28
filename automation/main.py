@@ -32,7 +32,7 @@ GROQ_KEYS_RAW = os.environ.get("GROQ_API_KEY", "")
 GROQ_API_KEYS = [k.strip() for k in GROQ_KEYS_RAW.split(",") if k.strip()]
 
 WEBSITE_URL = "https://trends-daily-news.vercel.app" 
-INDEXNOW_KEY = "5b3e50c6d7b845d3ba6768de22595f94" # Ganti dengan key Anda jika ada
+INDEXNOW_KEY = "18753e66adf346f4bb2889ca1e3c7c51" # Ganti dengan key Anda jika ada
 
 if not GROQ_API_KEYS:
     logging.critical("❌ FATAL ERROR: Groq API Key is missing!")

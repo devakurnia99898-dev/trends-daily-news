@@ -31,7 +31,7 @@ warnings.filterwarnings("ignore", category=FutureWarning, module="google.api_cor
 GROQ_KEYS_RAW = os.environ.get("GROQ_API_KEY", "") 
 GROQ_API_KEYS = [k.strip() for k in GROQ_KEYS_RAW.split(",") if k.strip()]
 
-WEBSITE_URL = "https://trends-daily-news.vercel.app" 
+WEBSITE_URL = "https://trends-daily-news.netlify.app" 
 INDEXNOW_KEY = "18753e66adf346f4bb2889ca1e3c7c51" # Ganti dengan key Anda jika ada
 
 if not GROQ_API_KEYS:

@@ -27,7 +27,6 @@ logging.basicConfig(
 warnings.filterwarnings("ignore", category=FutureWarning, module="google.api_core")
 
 # --- 🟢 GOOGLE INDEXING LIB ---
-# Kita bungkus try-except agar script tidak crash jika library google belum diinstall
 try:
     from oauth2client.service_account import ServiceAccountCredentials
     from googleapiclient.discovery import build
@@ -50,7 +49,7 @@ if not GROQ_API_KEYS:
 
 # --- 🟢 CONSTANTS & SETTINGS ---
 TARGET_PER_SOURCE = 2     
-COOLDOWN_SECONDS = 20     
+COOLDOWN_SECONDS = 25  # Ditambah biar lebih aman
 AUTHOR_NAME = "Glitz Editorial Desk"
 
 CONTENT_DIR = "content/articles"
@@ -76,10 +75,11 @@ AUTHORITY_MAP = {
     "People": "https://people.com"
 }
 
+# Update User Agent lebih modern
 USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Mobile/15E148 Safari/604.1"
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15",
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1"
 ]
 
 RAW_IMAGE_DB = {
@@ -90,7 +90,11 @@ RAW_IMAGE_DB = {
         "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=1200&q=95",
         "https://images.unsplash.com/photo-1505686994434-e3cc5abf1330?w=1200&q=95",
         "https://images.unsplash.com/photo-1514525253440-b393452e8d26?w=1200&q=95",
-        "https://images.unsplash.com/photo-1499364615650-ec38552f4f34?w=1200&q=95"
+        "https://images.unsplash.com/photo-1499364615650-ec38552f4f34?w=1200&q=95",
+        "https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?w=1200&q=95",
+        "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=1200&q=95",
+        "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=1200&q=95",
+        "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200&q=95"
     ]
 }
 
@@ -149,7 +153,7 @@ def get_external_sources_formatted():
         formatted_list.append(f"{key} ({url})")
     return ", ".join(formatted_list)
 
-# --- 🟢 IMAGE ENGINE (DISCOVER OPTIMIZED) ---
+# --- 🟢 IMAGE ENGINE (STRICT FILTER) ---
 def get_unique_stock_image():
     target_list = RAW_IMAGE_DB["General"]
     random.shuffle(target_list)
@@ -162,12 +166,24 @@ def download_and_process_image(url, path, is_ai=False):
         headers = {"User-Agent": random.choice(USER_AGENTS)}
         r = requests.get(url, headers=headers, timeout=30)
         
-        if len(r.content) < 15000:
-            logging.warning("      ⚠️ Image too small/corrupt. Skipping.")
+        # 🛡️ FILTER AGRESIF (UPDATED)
+        # Kita naikkan batas minimum file jadi 80KB (80000 bytes).
+        # Gambar error Pollinations pixel art biasanya < 60KB.
+        # Foto asli HD > 100KB.
+        # Khusus untuk AI, kita cek size dengan ketat. Untuk Stock, kita lebih longgar.
+        
+        if is_ai and len(r.content) < 80000:
+            logging.warning(f"      ⚠️ AI Image too small ({len(r.content)} bytes). REJECTED.")
             return False
+            
+        # Untuk stock image, batas bawah lebih rendah karena kompresi Unsplash bagus
+        if not is_ai and len(r.content) < 10000:
+             logging.warning("      ⚠️ Stock Image corrupt. Skipping.")
+             return False
 
         if r.status_code == 200:
             img = Image.open(BytesIO(r.content)).convert("RGB")
+            # Resize ke standar Discover
             img = img.resize((1200, 675), Image.Resampling.LANCZOS)
             enhancer = ImageEnhance.Color(img)
             img = enhancer.enhance(1.1)
@@ -186,23 +202,28 @@ def generate_image_hybrid(query, slug):
 
     logging.info(f"🎨 Processing Image for: {slug}...")
 
-    # TRY AI GENERATOR
+    # --- LANGKAH 1: COBA AI GENERATOR ---
     try:
         clean_query = re.sub(r'[^a-zA-Z0-9\s]', '', query)[:150]
-        safe_prompt = requests.utils.quote(f"cinematic photo of {clean_query}, realistic, 4k, news style")
+        safe_prompt = requests.utils.quote(f"cinematic photo of {clean_query}, realistic, 4k, detailed news photography")
         seed = random.randint(1, 999999)
+        
         ai_url = f"https://image.pollinations.ai/prompt/{safe_prompt}?width=1280&height=720&nologo=true&model=flux-realism&seed={seed}"
         
-        logging.info("      🤖 Attempting AI Generation...")
+        logging.info("      🤖 Attempting AI Generation (Strict Filter 80KB)...")
         if download_and_process_image(ai_url, filepath, is_ai=True):
             logging.info("      ✅ AI Image Created Successfully")
             return public_path
+        else:
+             logging.info("      ❌ AI Image Rejected (Rate Limit/Quality).")
+            
     except Exception as e:
         logging.warning(f"      ⚠️ AI Gen Failed: {e}")
 
-    # FALLBACK STOCK
+    # --- LANGKAH 2: FALLBACK KE STOCK (PASTI JALAN) ---
     logging.info("      🔄 Switching to High-Quality Stock Image...")
     stock_url = get_unique_stock_image()
+    
     if download_and_process_image(stock_url, filepath, is_ai=False):
         mark_image_as_used(stock_url, slug)
         logging.info("      ✅ Stock Image Applied")
@@ -210,7 +231,7 @@ def generate_image_hybrid(query, slug):
 
     return "/images/default-glitz.jpg"
 
-# --- 🟢 INDEXING API (RESTORED) ---
+# --- 🟢 INDEXING API ---
 def submit_to_indexnow(url):
     try:
         endpoint = "https://api.indexnow.org/indexnow"
@@ -308,7 +329,7 @@ def repair_markdown(text):
 
 # --- MAIN AUTOMATION ---
 def main():
-    logging.info("🎬 Starting Glitz Automation (Discover + Indexing Edition)...")
+    logging.info("🎬 Starting Glitz Automation (Strict Filter Edition)...")
     os.makedirs(CONTENT_DIR, exist_ok=True)
     os.makedirs(IMAGE_DIR, exist_ok=True)
     os.makedirs(DATA_DIR, exist_ok=True)
@@ -382,11 +403,10 @@ url: "/{slug}/"
             save_link_to_memory(meta['title'], slug)
             logging.info(f"      ✅ Published: {slug}")
             
-            # --- 🚀 INDEXING (RESTORED) ---
+            # Indexing
             full_url = f"{WEBSITE_URL}/{slug}/"
             submit_to_indexnow(full_url)
             submit_to_google(full_url)
-            # -----------------------------
             
             source_count += 1
             generated_count += 1

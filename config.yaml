@@ -1,4 +1,4 @@
-baseURL: "https://trends-daily-news.vercel.app/"
+baseURL: "https://trends-daily-news.netlify.app/"
 languageCode: "en-us"
 title: "trends Daily"
 

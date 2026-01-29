@@ -44,9 +44,10 @@ jobs:
             echo "No changes to commit. Bot sleeping."
           else
             echo "Changes detected. Committing..."
-            # [skip ci] ditambahkan agar GitHub Actions tidak looping, 
-            # TAPI Netlify biasanya tetap akan mendeteksi ini dan melakukan deploy.
-            git commit -m "⚽ New trends Update [skip ci]"
+            
+            # PERBAIKAN: [skip ci] DIHAPUS.
+            # Netlify sekarang akan membaca commit ini dan otomatis melakukan Deploy.
+            git commit -m "⚽ New trends Update"
             
             # Pull dulu barangkali ada update manual dari Anda agar tidak crash
             git pull --rebase origin main

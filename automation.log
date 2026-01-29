@@ -929,3 +929,98 @@
 2026-01-29 07:58:37,277 - INFO -    🚀 Google Indexing Submitted
 2026-01-29 07:58:37,277 - INFO -       ✅ Published: biggest-pop-culture-moments
 2026-01-29 07:58:52,277 - INFO - 🎉 Automation Finished.
+2026-01-29 09:44:28,172 - INFO - 🎬 Starting Glitz Daily Automation (SAFE MODE)...
+2026-01-29 09:44:28,172 - INFO - 
+📡 Scanning: Entertainment US...
+2026-01-29 09:44:28,865 - INFO -    ✨ Analyzing: Bruce Springsteen releases searing prote...
+2026-01-29 09:44:29,399 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:44:29,421 - INFO -       ⏭️  Skipped (Exists)
+2026-01-29 09:44:29,421 - INFO -    ✨ Analyzing: 'Why can't women have experience?' New B...
+2026-01-29 09:44:29,872 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:44:32,255 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:44:32,256 - INFO - 🎨 Processing Image for: bridgerton-series-tackles-sex-taboo...
+2026-01-29 09:44:32,256 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-29 09:44:33,145 - INFO -    🚀 IndexNow Submitted
+2026-01-29 09:44:33,484 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-29 09:44:33,485 - INFO - Attempting refresh to obtain initial access_token
+2026-01-29 09:44:33,511 - INFO - Refreshing access_token
+2026-01-29 09:44:33,847 - INFO -    🚀 Google Indexing Submitted
+2026-01-29 09:44:33,847 - INFO -       ✅ Published: bridgerton-series-tackles-sex-taboo
+2026-01-29 09:44:48,847 - INFO -    ✨ Analyzing: Ray J Says He’s in His ‘Last Days’ Due t...
+2026-01-29 09:44:49,245 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:44:51,258 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:44:51,259 - INFO - 🎨 Processing Image for: ray-j-talks-heart-health-issues...
+2026-01-29 09:44:51,259 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-29 09:44:52,113 - INFO -    ✅ Stock Image Applied
+2026-01-29 09:44:52,429 - INFO -    🚀 IndexNow Submitted
+2026-01-29 09:44:52,431 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-29 09:44:52,432 - INFO - Attempting refresh to obtain initial access_token
+2026-01-29 09:44:52,458 - INFO - Refreshing access_token
+2026-01-29 09:44:52,713 - INFO -    🚀 Google Indexing Submitted
+2026-01-29 09:44:52,713 - INFO -       ✅ Published: ray-j-talks-heart-health-issues
+2026-01-29 09:45:07,713 - INFO - 
+📡 Scanning: Gaming News...
+2026-01-29 09:45:08,258 - INFO -    ✨ Analyzing: Rowdy’s Esports Arena Takes Gaming to An...
+2026-01-29 09:45:08,502 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:08,503 - INFO -       ⏭️  Skipped (Exists)
+2026-01-29 09:45:08,503 - INFO -    ✨ Analyzing: Christopher Scroggins Appointed Esports ...
+2026-01-29 09:45:08,743 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:11,040 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:11,041 - INFO - 🎨 Processing Image for: epic-games-appoints-new-esports-coordinator...
+2026-01-29 09:45:11,041 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-29 09:45:11,168 - INFO -    ✅ Stock Image Applied
+2026-01-29 09:45:11,491 - INFO -    🚀 IndexNow Submitted
+2026-01-29 09:45:11,492 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-29 09:45:11,493 - INFO - Attempting refresh to obtain initial access_token
+2026-01-29 09:45:11,519 - INFO - Refreshing access_token
+2026-01-29 09:45:11,782 - INFO -    🚀 Google Indexing Submitted
+2026-01-29 09:45:11,782 - INFO -       ✅ Published: epic-games-appoints-new-esports-coordinator
+2026-01-29 09:45:26,782 - INFO -    ✨ Analyzing: The Esports Nations Cup adds Dota 2 to i...
+2026-01-29 09:45:27,009 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:27,010 - INFO -       ⏭️  Skipped (Exists)
+2026-01-29 09:45:27,010 - INFO -    ✨ Analyzing: EDward Gaming completed 2026 LPL Roster...
+2026-01-29 09:45:27,411 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:30,488 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:30,489 - INFO - 🎨 Processing Image for: edward-gaming-completes-roster...
+2026-01-29 09:45:30,489 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-29 09:45:30,616 - INFO -    ✅ Stock Image Applied
+2026-01-29 09:45:30,927 - INFO -    🚀 IndexNow Submitted
+2026-01-29 09:45:30,928 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-29 09:45:30,929 - INFO - Attempting refresh to obtain initial access_token
+2026-01-29 09:45:30,955 - INFO - Refreshing access_token
+2026-01-29 09:45:31,215 - INFO -    🚀 Google Indexing Submitted
+2026-01-29 09:45:31,215 - INFO -       ✅ Published: edward-gaming-completes-roster
+2026-01-29 09:45:46,215 - INFO - 
+📡 Scanning: Pop Culture...
+2026-01-29 09:45:46,813 - INFO -    ✨ Analyzing: The 15 biggest pop culture moments of 20...
+2026-01-29 09:45:47,218 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:47,219 - INFO -       ⏭️  Skipped (Exists)
+2026-01-29 09:45:47,219 - INFO -    ✨ Analyzing: The Official 2026 Pop Culture Ins & Outs...
+2026-01-29 09:45:47,501 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:47,502 - INFO -       ⏭️  Skipped (Exists)
+2026-01-29 09:45:47,502 - INFO -    ✨ Analyzing: From uplifting to degrading, here are th...
+2026-01-29 09:45:47,755 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:47,756 - INFO -       ⏭️  Skipped (Exists)
+2026-01-29 09:45:47,756 - INFO -    ✨ Analyzing: The 25 Best TV Shows, Movies, and Pop Cu...
+2026-01-29 09:45:48,253 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:51,141 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:45:51,142 - INFO - 🎨 Processing Image for: best-of-2025-pop-culture...
+2026-01-29 09:45:51,142 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-29 09:45:51,749 - INFO -    🚀 IndexNow Submitted
+2026-01-29 09:45:51,751 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-29 09:45:51,751 - INFO - Attempting refresh to obtain initial access_token
+2026-01-29 09:45:51,777 - INFO - Refreshing access_token
+2026-01-29 09:45:52,047 - INFO -    🚀 Google Indexing Submitted
+2026-01-29 09:45:52,047 - INFO -       ✅ Published: best-of-2025-pop-culture
+2026-01-29 09:46:07,047 - INFO -    ✨ Analyzing: The Best New Couple, the Worst Threesome...
+2026-01-29 09:46:07,634 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:46:10,705 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-01-29 09:46:10,706 - INFO - 🎨 Processing Image for: best-and-worst-of-pop-culture-2025...
+2026-01-29 09:46:10,706 - INFO -    📸 Fetching High-Quality Stock Image (Unsplash)...
+2026-01-29 09:46:11,003 - INFO -    🚀 IndexNow Submitted
+2026-01-29 09:46:11,005 - INFO - file_cache is only supported with oauth2client<4.0.0
+2026-01-29 09:46:11,005 - INFO - Attempting refresh to obtain initial access_token
+2026-01-29 09:46:11,031 - INFO - Refreshing access_token
+2026-01-29 09:46:11,270 - INFO -    🚀 Google Indexing Submitted
+2026-01-29 09:46:11,270 - INFO -       ✅ Published: best-and-worst-of-pop-culture-2025
+2026-01-29 09:46:26,271 - INFO - 🎉 Automation Finished.
